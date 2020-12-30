@@ -1,0 +1,15 @@
+#container {
+    width: 100vw;
+    height: 100vh;
+}
+.buttonContainer {
+    margin: 10px auto;
+    width: 200px;
+    border:1px solid blue;
+    text-align: center;
+}
+.buttonContainer a {
+    height: 100%;
+    width: 100%;
+    
+}
