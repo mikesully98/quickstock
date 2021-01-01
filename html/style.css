@@ -43,7 +43,7 @@
     cursor: pointer;
     font-size: 40px;
     font-family:'Roboto';
-    width: 250px;
+    width: 270px;
   }
   
   /* Dropdown button on hover & focus */
@@ -88,3 +88,45 @@
   
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
+
+
+  .callBtn {
+    background-color: #3dd800;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 40px;
+    font-family:'Roboto';
+    width: 250px;
+    margin-top: 50px;
+  }
+  .callBtn:hover {
+    background-color: #329c08;
+  }
+
+  .messageBoardContainer {
+    height: 500px;
+    width: 700px;
+    
+    border-radius: 10px;
+    margin: auto;
+  }
+  #messageBoardInner {
+    height: 460px;
+    width: 650px;
+    margin: auto;
+    margin-top: 10px;
+  }
+  #messageBoardTitleContainer {
+    text-align: center;
+  }
+  #messageBoardTitleContainer h3 {
+    font-family: 'Roboto';
+  }
+  #messageContainer {
+    border: 2px solid rgba(49, 49, 49, 0.575);
+    height: 400px;
+    width: 100%;
+  }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+<div id="container">
+    <h1>Stock</h1>
+    <div class="messageBoardContainer">
+        <div id="messageBoardInner">
+            <div id="messageBoardTitleContainer">
+                <h3>Current Carry-Outs</h3>
+                <div id="messageContainer">
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+        <div class="buttonContainer">
+           <button onclick="localStorage.clear()" class="buttonSelect" id="televisionSelect">Clear</button>
+        </div>
+        <div class="buttonContainer">
+            <a href="index.html"><button class="buttonSelect" id="televisionSelect">Home</button></a>
+        </div>
+        
+</div>
+
+
+<script>
+    let call = document.createTextNode(localStorage.getItem('key'));
+    let message = document.createElement('p');
+    message.appendChild(call);
+    document.getElementById('messageContainer').appendChild(message);
+</script>
+      
+</body>
+</html>

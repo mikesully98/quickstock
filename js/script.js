@@ -1,8 +1,8 @@
 const lgSizes =['lg',24,28,32,43,48,49,50,55,65,75,85];
 const samsungSizes = ['samsung',32,40,43,50,55,65,75,85];
-const sonySizes =['sony',43,50,55,65,75,85];
+const sonySizes =['sony',43,49,50,55,65,75,85];
 const elementSizes = ['element',24,29,32,43,48,49,50,55,65,75,85];
-const hisenseSizes = ['hisense',24,28,32,43,48,49,50,55,65,75,85];
+const hisenseSizes = ['hisense',24,28,32,43,48,49,50,55,58,65,75,85];
 const rcaSizes = ['rca',24,28,32,43,48,49,50,55,65,75,85];
 const tclSizes = ['tcl',24,28,32,43,48,49,50,55,65,75,85];
 
@@ -15,16 +15,29 @@ const rcaSeries = ['RT3205','RTR4060D','RT4038'];
 const tclSeries = ['32S335','32S325','32S327','50S425','40S325','43S425','50S535','55S425','55R635','55S525','55S535','65R635','65S425','65S525','65S535','65S435','75S425','75S535','75R635'];
 
 let brandChoice;
+let currentBrand;
+let currentSeries = document.querySelector('#myDropdownc');
+let currentSize = document.querySelector('#myDropdownb');
+
+let finalTelevision;
+
+
 
 function myFunction(letter) {
     document.getElementById(`myDropdown${letter}`).classList.toggle("show");
 }
 
 function tvChoice(choice) {
+
+  for(let i = currentSize.children.length; i > 0; i--) {
+    currentSize.removeChild(currentSize.childNodes[i]);
+  }
+
   if(choice == 'samsung') {
     brandChoice = 'Samsung';
     document.querySelector('#dropbtna').innerText = brandChoice;
     for(let i = 0; i < samsungSizes.length; i++) {
+      
       let dropdown = document.querySelector('#myDropdownb');
       let para = document.createElement("a");
       let node = document.createTextNode(samsungSizes[i]);
@@ -36,7 +49,7 @@ function tvChoice(choice) {
   else if(choice == 'lg') {
     brandChoice = 'LG';
     document.querySelector('#dropbtna').innerText = brandChoice;
-    for(let i = 0; i < samsungSizes.length; i++) {
+    for(let i = 0; i < lgSizes.length; i++) {
       let dropdown = document.querySelector('#myDropdownb');
       let para = document.createElement("a");
       let node = document.createTextNode(lgSizes[i]);
@@ -48,7 +61,7 @@ function tvChoice(choice) {
   else if(choice == 'sony') {
     brandChoice = 'Sony';
     document.querySelector('#dropbtna').innerText = brandChoice;
-    for(let i = 0; i < samsungSizes.length; i++) {
+    for(let i = 0; i < sonySizes.length; i++) {
       let dropdown = document.querySelector('#myDropdownb');
       let para = document.createElement("a");
       let node = document.createTextNode(sonySizes[i]);
@@ -60,7 +73,7 @@ function tvChoice(choice) {
   else if(choice == 'element') {
     brandChoice = 'Element';
     document.querySelector('#dropbtna').innerText = brandChoice;
-    for(let i = 0; i < samsungSizes.length; i++) {
+    for(let i = 0; i < elementSizes.length; i++) {
       let dropdown = document.querySelector('#myDropdownb');
       let para = document.createElement("a");
       let node = document.createTextNode(elementSizes[i]);
@@ -72,7 +85,7 @@ function tvChoice(choice) {
   else if(choice == 'tcl') {
     brandChoice = 'TCL';
     document.querySelector('#dropbtna').innerText = brandChoice;
-    for(let i = 0; i < samsungSizes.length; i++) {
+    for(let i = 0; i < tclSizes.length; i++) {
       let dropdown = document.querySelector('#myDropdownb');
       let para = document.createElement("a");
       let node = document.createTextNode(tclSizes[i]);
@@ -84,7 +97,7 @@ function tvChoice(choice) {
   else if(choice == 'hisense') {
     brandChoice = 'Hisense';
     document.querySelector('#dropbtna').innerText = brandChoice;
-    for(let i = 0; i < samsungSizes.length; i++) {
+    for(let i = 0; i < hisenseSizes.length; i++) {
       let dropdown = document.querySelector('#myDropdownb');
       let para = document.createElement("a");
       let node = document.createTextNode(hisenseSizes[i]);
@@ -96,7 +109,7 @@ function tvChoice(choice) {
   else if(choice == 'rca') {
     brandChoice = 'RCA';
     document.querySelector('#dropbtna').innerText = brandChoice;
-    for(let i = 0; i < samsungSizes.length; i++) {
+    for(let i = 0; i < rcaSizes.length; i++) {
       let dropdown = document.querySelector('#myDropdownb');
       let para = document.createElement("a");
       let node = document.createTextNode(rcaSizes[i]);
@@ -105,10 +118,12 @@ function tvChoice(choice) {
       dropdown.appendChild(para);
     }
   }
-  
 }
 
 function tvSeries(size, brand) {
+  for(let i = currentSeries.children.length; i > 0; i--) {
+    currentSeries.removeChild(currentSeries.childNodes[i]);
+  }
   document.querySelector('#dropbtnb').innerText = size + "\"";
   let thisSeries = [];
   if(brand == 'samsung') {
@@ -123,13 +138,14 @@ function tvSeries(size, brand) {
       let dropdown = document.querySelector('#myDropdownc');
       let para = document.createElement("a");
       let node = document.createTextNode(thisSeries[i]);
+      para.setAttribute('onclick',`finalTV('${thisSeries[i]}')`)
       para.appendChild(node);
       dropdown.appendChild(para);
     }
   } // if samsung
   else if(brand == 'lg') {
     lgSeries.forEach(function(item) {
-      if(item.includes(`UN${size}`) || item.includes(`QN${size}`)) {
+      if(item.includes(`${size}LJ`) || item.includes(`${size}LF`) || item.includes(`${size}LM`) || item.includes(`${size}NANO`) || item.includes(`${size}UN`) || item.includes(`OLED${size}`)) {
         thisSeries.push(item)
       }
     })
@@ -139,14 +155,14 @@ function tvSeries(size, brand) {
       let dropdown = document.querySelector('#myDropdownc');
       let para = document.createElement("a");
       let node = document.createTextNode(thisSeries[i]);
-      // para.setAttribute('onclick', `tvSeries(${thisSeries[i]},'samsung')`);
+      para.setAttribute('onclick',`finalTV('${thisSeries[i]}')`)
       para.appendChild(node);
       dropdown.appendChild(para);
     }
   } // if lg
   else if(brand == 'sony') {
     sonySeries.forEach(function(item) {
-      if(item.includes(size)) {
+      if(item.includes(`XBR${size}`) || item.includes(`KD${size}`)) {
         thisSeries.push(item)
       }
     })
@@ -156,14 +172,14 @@ function tvSeries(size, brand) {
       let dropdown = document.querySelector('#myDropdownc');
       let para = document.createElement("a");
       let node = document.createTextNode(thisSeries[i]);
-      // para.setAttribute('onclick', `tvSeries(${thisSeries[i]},'samsung')`);
+      para.setAttribute('onclick',`finalTV('${thisSeries[i]}')`)
       para.appendChild(node);
       dropdown.appendChild(para);
     }
   } // if sony
   else if(brand == 'element') {
     elementSeries.forEach(function(item) {
-      if(item.includes(size)) {
+      if(item.includes(`E1AA${size}`) || item.includes(`E2AA${size}`) || item.includes(`E4AA${size}`) || item.includes(`E4FAA${size}`) || item.includes(`E4SW${size}`)) {
         thisSeries.push(item)
       }
     })
@@ -173,14 +189,14 @@ function tvSeries(size, brand) {
       let dropdown = document.querySelector('#myDropdownc');
       let para = document.createElement("a");
       let node = document.createTextNode(thisSeries[i]);
-      // para.setAttribute('onclick', `tvSeries(${thisSeries[i]},'samsung')`);
+      para.setAttribute('onclick',`finalTV('${thisSeries[i]}')`)
       para.appendChild(node);
       dropdown.appendChild(para);
     }
   } // if element
   else if(brand == 'tcl') {
     tclSeries.forEach(function(item) {
-      if(item.includes(size)) {
+      if(item.includes(`${size}S`) || item.includes(`${size}R`)) {
         thisSeries.push(item)
       }
     })
@@ -190,14 +206,14 @@ function tvSeries(size, brand) {
       let dropdown = document.querySelector('#myDropdownc');
       let para = document.createElement("a");
       let node = document.createTextNode(thisSeries[i]);
-      // para.setAttribute('onclick', `tvSeries(${thisSeries[i]},'samsung')`);
+      para.setAttribute('onclick',`finalTV('${thisSeries[i]}')`)
       para.appendChild(node);
       dropdown.appendChild(para);
     }
   } // if tcl
   else if(brand == 'hisense') {
     hisenseSeries.forEach(function(item) {
-      if(item.includes(size)) {
+      if(item.includes(`${size}H4F`) || item.includes(`${size}H`) || item.includes(`${size}R7`)) {
         thisSeries.push(item)
       }
     })
@@ -207,14 +223,14 @@ function tvSeries(size, brand) {
       let dropdown = document.querySelector('#myDropdownc');
       let para = document.createElement("a");
       let node = document.createTextNode(thisSeries[i]);
-      // para.setAttribute('onclick', `tvSeries(${thisSeries[i]},'samsung')`);
+      para.setAttribute('onclick',`finalTV('${thisSeries[i]}')`)
       para.appendChild(node);
       dropdown.appendChild(para);
     }
   } // if hisense
   else if(brand == 'rca') {
     rcaSeries.forEach(function(item) {
-      if(item.includes(size)) {
+      if(item.includes(`RT${size}`) || item.includes(`RTR${size}`)) {
         thisSeries.push(item)
       }
     })
@@ -224,7 +240,7 @@ function tvSeries(size, brand) {
       let dropdown = document.querySelector('#myDropdownc');
       let para = document.createElement("a");
       let node = document.createTextNode(thisSeries[i]);
-      // para.setAttribute('onclick', `tvSeries(${thisSeries[i]},'samsung')`);
+      para.setAttribute('onclick',`finalTV('${thisSeries[i]}')`)
       para.appendChild(node);
       dropdown.appendChild(para);
     }
@@ -234,8 +250,21 @@ function tvSeries(size, brand) {
 
 
 
-} // end tvSeries
+} // end tvSeries 
 
+function finalTV(series) {
+  document.querySelector('#dropbtnc').innerText = series;
+  finalTelevision = series;
+}
+
+function callStock() {
+  localStorage.setItem('key',finalTelevision);
+  let messageBoard = document.getElementById('messageContainer');
+  let newMessage = document.createElement('p');
+  let node = document.createTextNode(localStorage.getItem('key'));
+  newMessage.appendChild(node);
+  messageBoard.appendChild(newMessage);
+}
   
   // Close the dropdown menu if the user clicks outside of it
   window.onclick = function(event) {
