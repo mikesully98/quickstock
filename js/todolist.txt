@@ -1,3 +1,8 @@
 
 -) call stock button sends a text message to provided numbers and also sends it
 to the message board on the stock homepage
+
+-) get a domain and see if localstorage works correctly
+
+-) have the call stock button redirect to home page and have the final model version sent
+to the stock message board
