@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('../partials/_header') %>
+    
+</head>
+<body>
+<div id="container">
+    <h1>Stock</h1>
+    <div class="messageBoardContainer">
+        <div id="messageBoardInner">
+            <div id="messageBoardTitleContainer">
+                <h3>Current Carry-Outs</h3>
+                <div id="messageContainer">
+                            <%
+                if(userData.length!=0){
+                var i=1;
+                userData.forEach(function(data){
+                %>
+                <tr>
+                <td><%=i; %></td>
+                <td><%=data.model %></td>
+                </tr>
+                <%  i++; }) %>
+        <% } else{ %>
+            <tr>
+                <td colspan="7">No Data Found</td>
+            </tr>
+        <% } %>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+        <div class="buttonContainer">
+           <button onclick="localStorage.clear()" class="buttonSelect" id="televisionSelect">Clear</button>
+        </div>
+        <div class="buttonContainer">
+            <a href="index.ejs"><button class="buttonSelect" id="televisionSelect">Home</button></a>
+        </div>
+        
+</div>
+
+
+      
+</body>
+</html>
